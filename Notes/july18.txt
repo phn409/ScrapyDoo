@@ -1,0 +1,5 @@
+Current state:
+We have a program that scrapes N_vols+N_iss for all APS journals.
+
+To do:
+Decide
