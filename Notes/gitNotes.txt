@@ -1,3 +1,6 @@
+# initial step
+git clone (URL)     # create repository on your machine. Do this only once ever.
+
 # development flow:
 
 pull changes from remote -> make changes (on local machine) -> add -> commit -> push
