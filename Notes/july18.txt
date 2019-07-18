@@ -2,4 +2,10 @@ Current state:
 We have a program that scrapes N_vols+N_iss for all APS journals.
 
 To do:
-Decide on a database format
+- First task: (aim for Monday 22)
+     Peter: store APS journal information in an SQL database
+     David: learn how to use Peter's SQL code
+
+- Second task: (aim for Monday 29)
+     Peter: scrape individual paper info
+     David: store paper info in SQL database
