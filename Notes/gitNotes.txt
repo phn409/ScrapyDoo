@@ -1,0 +1,13 @@
+# development flow:
+
+pull changes from remote -> make changes (on local machine) -> add -> commit -> push
+
+commands:
+
+git pull                                # make sure you're up to date locally
+
+(make changes)
+
+git add -A                              # -A implies add all changes
+git commit -m "(description of commit)" # describes what you've done
+git push origin master                  # pushes to remote (i.e., github cloud)
