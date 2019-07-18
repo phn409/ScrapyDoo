@@ -1,0 +1,4 @@
+journal		paper		date		issue		volume
+authors		field/keywords			citations	affiliations
+bibtex		arxiv link			DOI		content
+abstract	URL
