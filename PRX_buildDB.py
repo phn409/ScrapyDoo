@@ -25,7 +25,7 @@ print('total number of issues:',PRX.nIssues)
 vol_iss = {'Vol': list(reversed([*PRX.volumes,])), 'Iss':[]}
 for v in vol_iss['Vol']:
     #Print number of issues in each volume
-    PRX.indexIssues(All = False, num = int(v))
+    #PRX.indexIssues(All = False, num = int(v))
     ni = PRX.volumes[v].nIssues
     vol_iss['Iss'].append(ni)
     print('Volume: {}, Issues: {}'.format(v, ni))
@@ -55,48 +55,3 @@ engine = create_engine('mysql+mysqlconnector://{0}:{1}@{2}/{3}'.
 #engine = create_engine(sqlroot, echo=False)
 VIDF.to_sql(name='prx',con=engine,if_exists='replace', index=False) #if_exists='append'
 
-
-
-
-#%%
-#Cell 3 Extract information from DB
-"""
-mydb = mysql.connector.connect(
-  host="localhost", #PHNSQL
-  user="root",
-  passwd="MySQLPassword",
-  database = "MySQL"
-)
-
-# ====== Reading table ====== #
-# Reading Mysql table into a pandas DataFrame
-#sql_cmd = 'SELECT * FROM prx'
-#sql_cmd = "SELECT * FROM prx WHERE Iss < 4"
-sql_cmd = "SELECT * FROM prx WHERE Iss > 3"
-#DB_fetch = pd.read_sql('SELECT * FROM customers', engine)
-DB_fetch = pd.read_sql(sql_cmd, engine)
-print(DB_fetch)
-#----------------------------------------------------------------------------#
-#Output DB fetch as line-by-line output
-#mycursor.execute(sql_cmd)
-#
-#myresult = mycursor.fetchall()
-#
-#for x in myresult:
-#    print(x)
-#%%
-
-#Cell 4 Use SQL commands to modify table
-#Delete table row
-mycursor = mydb.cursor()
-sql = "DROP TABLE IF EXISTS prx"
-
-mycursor.execute(sql)
-#---------------------------------------------------------------------------------#
-#Update a table row
-#sql = "UPDATE customers SET address = %s WHERE address = %s"
-#val = ("Valley 345", "Canyon 123")
-#mycursor.execute(sql, val)
-#mydb.commit()
-#print(mycursor.rowcount, "record(s) affected")
-"""
