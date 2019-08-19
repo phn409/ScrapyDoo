@@ -1,0 +1,53 @@
+INSTALL
+go to https://dev.mysql.com/downloads/installer/
+alternatively, google mysql
+
+Download mysql-installer-web-community-8.0.17.0
+
+Run wizard. I had to do custom install to choose the correct Python distribution, otherwise it wouldn't let me install the connector.
+
+
+follow wizard instructions, I chose all default options.
+
+done
+-------------
+
+NEW DATABASES
+
+option 1:
+from MySQL command line
+
+CREATE DATABASE (your database);
+
+option 2:
+from sqlalchemy. This seems like something sqlalchemy wasn't really meant to do, so it's just a workaround.
+
+import sqlalchemy as sqal
+
+# first create an engine (must link to existing database):
+engine=sqal.create_engine('mysql+mysqlconnector:'
+			  '//USERNAME:PASSWORD'
+			  '@SERVER IP/DATABASE NAME')
+# where username and password are (for now) root & sqlPASSWORD. The server IP, for a local host, is 127.0.0.1.
+
+# then get the underlying engine:
+con=engine.connect()
+
+# commit the connection?
+con.execute('commit')
+
+# pass the MySQL command to create a new database
+con.execute('CREATE DATABASE new_db_name')
+
+# replace new_db_name with your new database
+
+option 3:
+from the graphical interface (MySQL Workbench)
+
+-> chooose MySQL Workbench from windows menu
+-> connect to database (under database tab)
+-> use "create new schema" button and name database
+
+------
+
+

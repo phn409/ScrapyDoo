@@ -1,0 +1,23 @@
+INSTALL
+go to https://dev.mysql.com/downloads/installer/
+alternatively, google mysql
+
+Download mysql-installer-web-community-8.0.17.0
+
+Run wizard. I had to do custom install to choose the correct Python distribution, otherwise it wouldn't let me install the connector.
+
+
+follow wizard instructions, I chose all default options.
+
+done
+-------------
+
+NEW DATABASES
+
+option 1:
+from MySQL command line
+
+CREATE DATABASE (your database);
+
+option 2:
+from sqlalchemy
