@@ -1,7 +1,0 @@
-SHOW DATABASES;
-- returns a list of databases
-
-CREATE DATABASE;
-- creates a new database, error if database already exists
-
-

@@ -1,0 +1,7 @@
+first steps towards database interaction using ORM completed
+
+to do:
+Peter -> scrape article details (paper titles, author list, & keywords)
+      -> play with Davids code
+
+David -> build base class to hold journal info in database

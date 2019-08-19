@@ -2,7 +2,7 @@ INSTALL
 go to https://dev.mysql.com/downloads/installer/
 alternatively, google mysql
 
-Download mysql-installer-web-community-8.0.17.0
+Download mysql-installer-web-community-8.0.17.0 (note, you don't have to make an account)
 
 Run wizard. I had to do custom install to choose the correct Python distribution, otherwise it wouldn't let me install the connector.
 
