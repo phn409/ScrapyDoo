@@ -34,6 +34,7 @@ VL = 9
 print(PRX.link(vol=VL, iss=1))
 PRX.monthRange(9, 1)    
 PRX.issueListing(9, 1)
+PRX.articleKeywords(VL, 1)
 #to DF
 #VIDF = pd.DataFrame(vol_iss)
 #print(VIDF)
