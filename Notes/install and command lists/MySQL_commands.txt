@@ -1,0 +1,10 @@
+SHOW DATABASES;
+- returns a list of databases
+
+CREATE DATABASE ____;
+- creates a new database with name ____, error if database already exists
+
+DROP DATABASE ____;
+- removes database ____, maybe error if database does not exist?
+
+

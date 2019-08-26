@@ -1,8 +1,15 @@
+"""
+scraper to pull journal info from APS journals
+"""
+
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 # holds information about an individual volume
 class volume:
+    """
+    small class to hold information about an individual volume
+    """
     # initialize object
     def __init__(self):
         self.nIssues=0
@@ -19,8 +26,22 @@ class volume:
 # Class to hold information involving all APS journals
 # input abbreviation (e.g., PRL, PRB etc)
 class APS:
-    # class initialization, holds urls
+    """
+    aps journal main class
+    """
     def __init__(self,abbrev,url='https://journals.aps.org/'):
+        """
+        initialize class
+        
+        Notes
+        -----
+        This is still incomplete
+
+        Parameters
+        ----------
+        abbrev : journal abbreviation
+        url : base url of journal
+        """
         self.abbrev=abbrev
         self.baseurl=url+abbrev+'/'
         self.volumeurl=url+abbrev+'/issues/'
