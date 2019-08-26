@@ -71,3 +71,9 @@ class APS:
             return self.volumeurl+str(vol)+'/'+str(iss)
         else:
             return self.baseurl
+
+    #Function to get the year for the volume.
+    
+    #Function to scrape an issue to retrive all article information.
+    #Input is base URL. Output is list of article names, corresponding 
+    #authors, DOI, keywords, etc.
