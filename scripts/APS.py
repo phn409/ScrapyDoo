@@ -4,6 +4,7 @@ scraper to pull journal info from APS journals
 
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
+import re
 
 # holds information about an individual volume
 class volume:
@@ -122,52 +123,82 @@ class APS:
         v: journal volume number
         i: journal issue number
         """
+        #list of URLS within the issue
+#        links = []
         issURL = self.link(vol = v, iss = i )
         html=urlopen(issURL)
         soup=BeautifulSoup(html,'html.parser')
         
-        titles = soup.find_all('h5', class_="title")
-        authors = soup.find_all('h6', class_="authors")
-        pubs = soup.find_all('h6', class_="pub-info")
-        for t, a, p in zip(titles, authors, pubs):
+#        titles = soup.find_all('h5', class_="title")
+#        authors = soup.find_all('h6', class_="authors")
+#        pubs = soup.find_all('h6', class_="pub-info")
+#        for t, a, p in zip(titles, authors, pubs):
+        blocks = soup.find_all('div', class_="article panel article-result")
+        for b in blocks:
+#            print(b)
+            titletag = b.find('h5', class_="title")
+            title = titletag.get_text()
             #Extract abstract url from title head
-            aURL = t.find('a', href = True)['href']
+            aURL = titletag.find('a', href = True)['href']
             alink = 'https://journals.aps.org' + aURL
-            print(t.get_text())
-            print(a.get_text())
-            print(p.get_text())
+            #Print out the scraped information
+            print(title)
             print(alink)
-            print('----------------------------------------------------------------')
-        
+            #Extract research area and topic keywords
+            kwlist = b.find('ul', class_="inline-list subjects")
+            #If the list tag exists
+            if kwlist:
+                lis = kwlist.find_all('li')
+                kws = [li.get_text() for li in lis]  
+                print(kws)
+#            print(a.get_text())
+#            print(p.get_text())                
+            print('----------------------------------------------------------------')        
         return
+    
+
+    
+class Article:
+    """
+    Article class 
+    Attributes: Paper ID, URL, title, authors, journal, year, volume, issue, article number,
+    page numbers, keywords, DOI number,  
+    Methods: abstract, formatted citation string, citations to, citations from
+    """
+    #Pass on inherited values from the upper classes
+    def __init__(self, url):
+        #Input article URL
+        html = urlopen(url)
+        soup = BeautifulSoup(html,'html.parser')
+#        infos = soup.find_all('meta', name = "citation_title")
+        infos = soup.find_all("meta", {"name" : re.compile(r"citation_*")})
+        print(infos)
+        return
+        
+        #Create article ID
+#    def articleID(self, url):
+#        html=urlopen(url)
+#        soup=BeautifulSoup(html,'html.parser')
+#        features=soup.find_all('b')
+#        
+#        return    
 #    def articleAuthors():
 #    """
 #    Method to extract authors. 
 #    Adds new author name to Authors database.
 #    """
     
-    def articleKeywords(self, v, i):
-        """
-        Method to extract keywords. 
-        Adds new keywords to Keywords database.
-        """
-        issURL = self.link(vol = v, iss = i )
-        html=urlopen(issURL)
-        soup=BeautifulSoup(html,'html.parser')
-        keylists = soup.find_all('ul', class_="inline-list subjects")
-        for ks in keylists:
-            kw = ks.find_all('li')
-            keywords = [li.get_text() for li in kw]
-            print(keywords)
-        return
-
-    
-#class article:
-    """
-    Article class 
-    Attributes: Paper ID, url, title, authors, journal, year, volume, issue, article number,
-    page numbers, keywords, DOI number,  
-    Methods: abstract, formatted citation, citations to, citations from
-    """
-    #Pass on inherited values from the upper classes
-#    def __init__(self):
+#    def articleKeywords(self, v, i):
+#        """
+#        Method to extract keywords. 
+#        Adds new keywords to Keywords database.
+#        """
+#        issURL = self.link(vol = v, iss = i )
+#        html=urlopen(issURL)
+#        soup=BeautifulSoup(html,'html.parser')
+#        keylists = soup.find_all('ul', class_="inline-list subjects")
+#        for ks in keylists:
+#            kw = ks.find_all('li')
+#            keywords = [li.get_text() for li in kw]
+#            print(keywords)
+#        return

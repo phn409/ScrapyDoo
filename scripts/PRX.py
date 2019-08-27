@@ -23,20 +23,22 @@ for v in vol_iss['Vol']:
         print(PRX.link(vol=v, iss=i))
         r = PRX.monthRange(v, i)
     #Append to year column
-    vol_iss['Yr'].append(r[1])        
+    vol_iss['Yr'].append(r[1])   
+#To DF     
 VIDF = pd.DataFrame(vol_iss)
 print(VIDF)
 #%%
 #Section to scrape a particular volume of a journal
 #Print out the issue URL corresponding to each volume/issue
+#Initialization
 VL = 9
+IS = 1
 #for i in range(1, PRX.volumes[str(VL)].nIssues + 1):
-print(PRX.link(vol=VL, iss=1))
-PRX.monthRange(9, 1)    
-PRX.issueListing(9, 1)
-PRX.articleKeywords(VL, 1)
-#to DF
-#VIDF = pd.DataFrame(vol_iss)
-#print(VIDF)
-    
+print(PRX.link(vol=VL, iss=IS))
+PRX.monthRange(VL, IS)    
+PRX.issueListing(VL, IS)
+#PRX.articleKeywords(VL, 1)
+
 #Create paper objects with index ID
+#%%
+a1 = Article("https://journals.aps.org/prx/abstract/10.1103/PhysRevX.9.011001")
