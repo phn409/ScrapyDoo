@@ -128,6 +128,7 @@ class APS:
         issURL = self.link(vol = v, iss = i )
         html=urlopen(issURL)
         soup=BeautifulSoup(html,'html.parser')
+        URLs = [] #Empty list
         
 #        titles = soup.find_all('h5', class_="title")
 #        authors = soup.find_all('h6', class_="authors")
@@ -151,10 +152,12 @@ class APS:
                 lis = kwlist.find_all('li')
                 kws = [li.get_text() for li in lis]  
                 print(kws)
-#            print(a.get_text())
-#            print(p.get_text())                
+                #Add utf-8 encode
+#                print(kws.encode('utf-8'))            
             print('----------------------------------------------------------------')        
-        return
+            #Collect URLs in the issue
+            URLs.append('https://journals.aps.org' + aURL)
+        return URLs
     
 
     
@@ -172,21 +175,36 @@ class Article:
         soup = BeautifulSoup(html,'html.parser')
 #        infos = soup.find_all('meta', name = "citation_title")
         infos = soup.find_all("meta", {"name" : re.compile(r"citation_*")})
-        print(infos)
+#        print(infos)
+        #Strip content values and assign to article attributes
+        self.Publisher = infos[0]['content']
+        self.Title = infos[1]['content']
+        self.pubdate = infos[2]['content']
+        self.DOI = infos[3]['content']
+        self.Journal = infos[4]['content']
+        self.jour = infos[5]['content']
+        self.vol = infos[6]['content']
+        self.iss = infos[7]['content']
+        self.pgone = infos[8]['content']
         return
         
-        #Create article ID
+    
+    #Create article ID
 #    def articleID(self, url):
+#        """
+#        Method to create an article ID for the specified article
+#        """    
 #        html=urlopen(url)
 #        soup=BeautifulSoup(html,'html.parser')
 #        features=soup.find_all('b')
 #        
 #        return    
 #    def articleAuthors():
-#    """
-#    Method to extract authors. 
-#    Adds new author name to Authors database.
-#    """
+#       """
+#       Method to extract authors. 
+#       Handles the author affiliations.
+#       Adds new author name to Authors database.
+#       """
     
 #    def articleKeywords(self, v, i):
 #        """
@@ -202,3 +220,8 @@ class Article:
 #            keywords = [li.get_text() for li in kw]
 #            print(keywords)
 #        return
+    def viewAbstract(self):
+        """
+        Method to print out the abstract for the article
+        """
+        #Encode text as utf-8

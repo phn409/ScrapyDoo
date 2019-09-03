@@ -36,9 +36,25 @@ IS = 1
 #for i in range(1, PRX.volumes[str(VL)].nIssues + 1):
 print(PRX.link(vol=VL, iss=IS))
 PRX.monthRange(VL, IS)    
-PRX.issueListing(VL, IS)
-#PRX.articleKeywords(VL, 1)
-
-#Create paper objects with index ID
+all_URL = PRX.issueListing(VL, IS)
+nums = range(len(all_URL))
+ix = 1
+#Empty object array
+arts = {}
+#Empty dictionary
+arts_dict = {'Num': [], 'Title':[], 'Jour':[], 'Vol':[], 'Iss':[], 'pgnum':[]}
+for u in all_URL[:5]:
+#    art = APS.Article(u)
+    str_ix = 'a' + str(ix)
+    arts.update({str_ix:Article(u)})
+    ix += 1
+#    arts_dict['Num'].append(ix)
+#    arts['Title'].append(art.Title)
+print(arts)
+#%%
+ix = 1
+for a in arts.keys():
+    print(ix, arts[a].Title)
+    ix += 1
 #%%
 a1 = Article("https://journals.aps.org/prx/abstract/10.1103/PhysRevX.9.011001")
